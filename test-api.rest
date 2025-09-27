@@ -1,0 +1,83 @@
+###
+curl -X POST http://localhost:3000/api/v1/auth/register \
+-H "Content-Type: application/json" \
+-d '{
+  "name": "admin bk",
+  "email": "adminbk@gmail.com",
+  "password": "admin123",
+  "organization_name": "Yayasan Nurul Hakim"
+}'
+
+###
+curl -X POST http://localhost:3000/api/v1/auth/login \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "adminbk@gmail.com",
+  "password": "admin123"
+}'
+
+###
+curl -X POST http://localhost:3000/api/v1/events \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzU4OTA2NDUxLCJleHAiOjE3NTg5OTI4NTF9.WwRbo0h5Lup5lEsdG8IxKOu9X0vWjOc1AmcxaDUUOko" \
+-d '{
+  "title": "Community Meeting",
+  "description": "Malabar gabungan",
+  "event_date": "2025-10-20",
+  "event_time": "19:30:00",
+  "location": "Masjid Nurul Hakim",
+  "max_participants": 100
+}'
+
+###
+curl -X GET http://localhost:3000/api/v1/events \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzU4OTA2NDUxLCJleHAiOjE3NTg5OTI4NTF9.WwRbo0h5Lup5lEsdG8IxKOu9X0vWjOc1AmcxaDUUOko"
+
+###
+curl -X POST http://localhost:3000/api/v1/attendance/participants \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzU4OTA2NDUxLCJleHAiOjE3NTg5OTI4NTF9.WwRbo0h5Lup5lEsdG8IxKOu9X0vWjOc1AmcxaDUUOko" \
+-d '{
+  "name": "Alice Johnson",
+  "email": "alice@email.com",
+  "phone": "08123456782",
+  "institution": "Company Y"
+}'
+###
+curl -X POST http://localhost:3000/api/v1/attendance/events/participants \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzU4OTA2NDUxLCJleHAiOjE3NTg5OTI4NTF9.WwRbo0h5Lup5lEsdG8IxKOu9X0vWjOc1AmcxaDUUOko" \
+-d '{
+  "event_id": 1,
+  "participant_id": 1
+}'
+###
+curl -X POST http://localhost:3000/api/v1/attendance/record \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzU4OTA2NDUxLCJleHAiOjE3NTg5OTI4NTF9.WwRbo0h5Lup5lEsdG8IxKOu9X0vWjOc1AmcxaDUUOko" \
+-d '{
+  "event_id": 1,
+  "participant_id": 1,
+  "status": "present",
+  "notes": "Hadir tepat waktu"
+}'
+
+###
+curl -X POST http://localhost:3000/api/v1/attendance/record/bulk \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzU4OTA2NDUxLCJleHAiOjE3NTg5OTI4NTF9.WwRbo0h5Lup5lEsdG8IxKOu9X0vWjOc1AmcxaDUUOko" \
+-d '{
+  "event_id": 1,
+  "attendance_records": [
+    {
+      "participant_id": 1,
+      "status": "present",
+      "notes": "On time"
+    },
+    {
+      "participant_id": 2,
+      "status": "late",
+      "notes": "10 minutes late"
+    }
+  ]
+}'

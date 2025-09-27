@@ -1,0 +1,29 @@
+// Contoh flow yang benar:
+// 1. Create participant
+POST /attendance/participants
+{
+  "name": "John Doe",
+  "email": "john@email.com"
+}
+###
+// 2. Create event  
+POST /events
+{
+  "title": "Meeting",
+  "event_date": "2024-01-15"
+}
+###
+// 3. Add participant to event
+POST /attendance/events/participants
+{
+  "event_id": 1,
+  "participant_id": 1
+}
+###
+// 4. Record attendance
+POST /attendance/record
+{
+  "event_id": 1,
+  "participant_id": 1,
+  "status": "present"
+}
