@@ -7,6 +7,14 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
+// QR Code Attendance Routes
+router.post("/qr/generate", authMiddleware, attendanceController.generateEventQR);
+router.get("/qr/event/:event_id", authMiddleware, attendanceController.getEventQR);
+router.post("/qr/scan", authMiddleware, attendanceController.processQRAttendance);
+
+// Public QR Attendance (untuk peserta)
+router.post("/qr/attend", attendanceController.publicQRAttendance);
+
 // Participant management
 router.post("/participants", attendanceController.addParticipant);
 router.get("/participants", attendanceController.getParticipants);

@@ -25,13 +25,22 @@ class Participant {
 
   // Get participants by event
   static async findByEvent(eventId) {
-    const [rows] = await pool.execute(
+    const [rows] = await pool.query(
       `SELECT p.*, ep.registered_at, a.status as attendance_status, a.attendance_time 
              FROM participants p
              JOIN event_participants ep ON p.id = ep.participant_id
              LEFT JOIN attendance a ON p.id = a.participant_id AND a.event_id = ?
              WHERE ep.event_id = ?`,
       [eventId, eventId]
+    );
+    return rows;
+  }
+  static async findParticipant(participant_data) {
+    const [rows] = await pool.execute(
+      `SELECT *
+             FROM participants 
+             WHERE email = ?`,
+      [participant_data]
     );
     return rows;
   }

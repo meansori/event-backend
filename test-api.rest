@@ -9,10 +9,10 @@ curl -X POST http://localhost:3000/api/v1/auth/register \
 }'
 
 ###
-curl -X POST http://localhost:3000/api/v1/auth/login \
+curl -X POST http://localhost:4000/api/v1/auth/login \
 -H "Content-Type: application/json" \
 -d '{
-  "email": "adminbk@gmail.com",
+  "email": "himeansori@gmail.com",
   "password": "admin123"
 }'
 
@@ -30,8 +30,12 @@ curl -X POST http://localhost:3000/api/v1/events \
 }'
 
 ###
-curl -X GET http://localhost:3000/api/v1/events \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzU4OTA2NDUxLCJleHAiOjE3NTg5OTI4NTF9.WwRbo0h5Lup5lEsdG8IxKOu9X0vWjOc1AmcxaDUUOko"
+curl -X GET http://localhost:4000/api/v1/events \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzU5MDYyNjcyLCJleHAiOjE3NTkxNDkwNzJ9.YUkCAS8u8hzQf6xk49eEoLP283X6l58cS4xd5Eajqhk"
+
+###
+curl -X GET http://localhost:4000/api/v1/events/5 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzU5MDYyNjcyLCJleHAiOjE3NTkxNDkwNzJ9.YUkCAS8u8hzQf6xk49eEoLP283X6l58cS4xd5Eajqhk"
 
 ###
 curl -X POST http://localhost:3000/api/v1/attendance/participants \
@@ -80,4 +84,39 @@ curl -X POST http://localhost:3000/api/v1/attendance/record/bulk \
       "notes": "10 minutes late"
     }
   ]
+}'
+
+###
+curl -X POST http://localhost:4000/api/v1/attendance/qr/generate/ \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzU4OTk3MzU4LCJleHAiOjE3NTkwODM3NTh9.il1snb9GIO1N6wvPNi1O-1f4VqN75BxS5XdeQ7Yj1gQ" \
+-d '{
+  "event_id": 8
+}'
+
+###
+curl -X GET http://localhost:4000/api/v1/attendance/qr/event/8 \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzU4OTk3MzU4LCJleHAiOjE3NTkwODM3NTh9.il1snb9GIO1N6wvPNi1O-1f4VqN75BxS5XdeQ7Yj1gQ" \
+
+###
+curl -X POST http://localhost:4000/api/v1/attendance/qr/scan \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzU4OTk3MzU4LCJleHAiOjE3NTkwODM3NTh9.il1snb9GIO1N6wvPNi1O-1f4VqN75BxS5XdeQ7Yj1gQ" \
+-d '{
+  "qr_data": "{\"event_id\":8,\"secret\":\"dd4aaca85ce530073fe41aa4a8c71213be211baac63d68ca689abde3b2f4e42c\",\"type\":\"event_attendance\"}",
+  "participant_data": {
+    "email": "nanda@gmail.com"
+  }
+}'
+
+###
+curl -X POST http://localhost:4000/api/v1/attendance/qr/attend \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzU4OTk3MzU4LCJleHAiOjE3NTkwODM3NTh9.il1snb9GIO1N6wvPNi1O-1f4VqN75BxS5XdeQ7Yj1gQ" \
+-d '{
+  "qr_data": "{\"event_id\":8,\"secret\":\"dd4aaca85ce530073fe41aa4a8c71213be211baac63d68ca689abde3b2f4e42c\",\"type\":\"event_attendance\"}",
+  "name": "John Doe",
+  "email": "dandy@gmail.com",
+  "phone": "08123456789"
 }'

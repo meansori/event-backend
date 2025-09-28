@@ -35,6 +35,17 @@ class Attendance {
     );
     return rows;
   }
+  static async getDataParticipant(eventId, id) {
+    const [rows] = await pool.execute(
+      `SELECT p.id, p.name, p.email, p.phone, p.institution, 
+                    a.status, a.attendance_time, a.notes
+             FROM attendance a
+             JOIN participants p ON a.participant_id = p.id
+             WHERE  a.participant_id = ? and a.event_id = ?`,
+      [id, eventId]
+    );
+    return rows;
+  }
 
   static async getAttendanceStats(eventId) {
     const [rows] = await pool.execute(
