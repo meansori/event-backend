@@ -1,0 +1,50 @@
+event-management-app
+#landing-page
+- login
+-- aman
+
+- register(full hide)
+-- bagian role tidak muncul
+-- gagal register
+
+#dashboard
+-- total event,ongoing,upcomming masih belum tampil
+-- total participant dan system account mau di hapus atau tidak ?
+-- quick action belum ada Tindakan
+
+#event
+-- CRUD aman
+-- di form login Ketika klik selain area form maka form langsung tertutup
+-- search event dan status event di bagian filter belum jalan
+
+#accounts
+-- create aman, namun karena show tidak muncul Update dan delete belum jalan
+
+#participants
+-- CRUD masih belum bisa
+curl -X POST http://localhost:3000/events \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksImVtYWlsIjoiam9obkBleGFtcGxlLmNvbSIsInJvbGVfaWQiOjMsImlhdCI6MTc1ODg2ODc0MiwiZXhwIjoxNzU4ODcyMzQyfQ.zMMm_VUbKFhIYoun0k3X_SsokEMtgB7E3FUX3o0QE4g" \
+-d '{
+    "title": "Tech Conference 2023",
+    "description": "Annual technology conference",
+    "location": "Convention Center",
+    "start_time": "2023-12-15 09:00:00",
+    "end_time": "2023-12-15 17:00:00",
+    "category_id": 4,
+    "status": "published",
+    "max_participants": 500
+}'
+
+CREATE DATABASE attendance_db;
+CREATE USER 'attendance_user'@'localhost' IDENTIFIED BY 'admin1234%';
+GRANT ALL PRIVILEGES ON attendance_db.* TO 'attendance_user'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+mysql -u attendance_user -p attendance_db < /var/www/attendance-api/attendance_db.sql
+
+git config --global user.name "meansori"
+git config --global user.email "himeansori@gmail.com"
+
+Eventuser3542025#

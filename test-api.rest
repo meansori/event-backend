@@ -9,7 +9,7 @@ curl -X POST http://localhost:3000/api/v1/auth/register \
 }'
 
 ###
-curl -X POST http://localhost:4000/api/v1/auth/login \
+curl -X POST http://31.97.109.215:4000/api/v1/auth/login \
 -H "Content-Type: application/json" \
 -d '{
   "email": "himeansori@gmail.com",
